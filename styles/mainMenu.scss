@@ -1,0 +1,253 @@
+.main-menu {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  width: 100%;
+
+  &__heading {
+    padding-top: 0.5rem;
+    font-size: 2.25rem;
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  &__edit {
+    @include glass();
+    padding: 0.4rem 0.9rem;
+    border-radius: 999px;
+    color: $text-color;
+    font-size: 0.85rem;
+    font-weight: 600;
+    letter-spacing: 0;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+
+    &:hover {
+      background: $glass-strong;
+    }
+
+    &[data-edit-mode] {
+      background: #fff;
+      color: $background;
+    }
+  }
+
+  &__search-bar {
+    width: 100%;
+    position: relative;
+  }
+
+  &__search-icon {
+    position: absolute;
+    left: 0.85rem;
+    top: 50%;
+    width: 1.1rem;
+    height: 1.1rem;
+    transform: translateY(-50%);
+    color: $text-muted;
+    pointer-events: none;
+  }
+
+  &__search-input {
+    @include glass();
+    width: 100%;
+    height: 2.75rem;
+    padding: 0 0.9rem 0 2.5rem;
+    font-family: inherit;
+    font-size: 1rem;
+    color: $text-color;
+    border-radius: 14px;
+    transition:
+      background-color 0.2s ease,
+      border-color 0.2s ease;
+
+    &::placeholder {
+      color: $text-muted;
+    }
+
+    &:focus,
+    &:focus-visible {
+      outline: none;
+      background: $glass-strong;
+      border-color: rgba(255, 255, 255, 0.3);
+    }
+  }
+
+  &__search-results {
+    position: absolute;
+    z-index: 2;
+    top: calc(100% + 0.4rem);
+    left: 0;
+    right: 0;
+    overflow: hidden;
+    background: $elevation;
+    border: $border;
+    border-radius: 14px;
+    box-shadow: $box-shadow;
+    backdrop-filter: blur(20px);
+
+    &:empty {
+      display: none;
+    }
+
+    &__hidden {
+      display: none;
+    }
+
+    .search-result {
+      padding: 0.7rem 0.9rem;
+      border-bottom: $border;
+      cursor: pointer;
+      transition: background-color 0.15s ease;
+
+      &:last-child {
+        border: none;
+      }
+
+      &:hover {
+        background-color: $elevation-2;
+      }
+
+      &__name {
+        font-size: 1rem;
+        font-weight: 600;
+      }
+
+      &__country {
+        font-size: 0.82rem;
+        color: $text-muted;
+      }
+    }
+  }
+
+  &__cities-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.65rem;
+  }
+
+  &__empty {
+    margin-top: 3rem;
+    text-align: center;
+    color: $text-muted;
+
+    strong {
+      display: block;
+      margin-bottom: 0.35rem;
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: $text-color;
+    }
+
+    p {
+      font-size: 0.9rem;
+    }
+  }
+}
+
+.city-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+
+  &__delete {
+    display: none;
+    width: 1.9rem;
+    flex-shrink: 0;
+    color: #ff5f57;
+    cursor: pointer;
+    transition: transform 0.15s ease;
+
+    &:hover {
+      transform: scale(1.08);
+    }
+
+    &--show {
+      display: block;
+    }
+  }
+}
+
+.city {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) max-content;
+  gap: 1rem;
+  min-height: 7rem;
+  padding: 1rem 1.1rem;
+  border-radius: $border-radius;
+  cursor: pointer;
+  overflow: hidden;
+  background:
+    linear-gradient(90deg, rgba(0, 0, 0, 0.35), rgba(0, 0, 0, 0.05)),
+    var(--condition-image),
+    $glass;
+  background-size: cover;
+  background-position: 50% 30%;
+  text-shadow: $text-shadow;
+  flex-grow: 1;
+  min-width: 0;
+  box-shadow: $box-shadow;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 14px 34px rgba(0, 0, 0, 0.3);
+  }
+
+  &__left-column {
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__name {
+    font-weight: 600;
+    font-size: 1.35rem;
+    letter-spacing: -0.01em;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+  }
+
+  &__country {
+    font-size: 0.82rem;
+    color: rgba(255, 255, 255, 0.8);
+  }
+
+  &__condition {
+    margin-top: auto;
+    padding-top: 1.25rem;
+    font-size: 0.9rem;
+    font-weight: 500;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+  }
+
+  &__temperature {
+    font-size: 2.75rem;
+    line-height: 1;
+    font-weight: 300;
+    letter-spacing: -0.04em;
+    text-align: right;
+  }
+
+  &__right-column {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  &__min-max-temperature {
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.9);
+    text-align: right;
+  }
+}

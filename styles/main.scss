@@ -1,0 +1,75 @@
+@import "variables";
+@import "mixins";
+@import "loading";
+@import "detailView";
+@import "mainMenu";
+
+@import url("https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,200..700&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+}
+
+body {
+  background: $background-deep;
+  -webkit-font-smoothing: antialiased;
+
+  @include largeScreens {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    background:
+      radial-gradient(circle at 20% 10%, #243046 0%, transparent 45%),
+      radial-gradient(circle at 85% 90%, #1d2a3a 0%, transparent 40%),
+      $background-deep;
+  }
+}
+
+#app {
+  position: relative;
+  background: linear-gradient(180deg, $background 0%, $background-deep 100%);
+  color: $text-color;
+  padding: 1.25rem 1.1rem 2rem;
+  min-height: 100vh;
+  font-family: "Inter", system-ui, sans-serif;
+  font-feature-settings: "tnum";
+  line-height: 1.4;
+
+  @include largeScreens {
+    width: 400px;
+    height: min($max-height-desktop, 94vh);
+    min-height: unset;
+    overflow: auto;
+    border-radius: 36px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow:
+      0 30px 80px rgba(0, 0, 0, 0.5),
+      0 0 0 8px rgba(255, 255, 255, 0.02);
+  }
+
+  &.show-background {
+    background:
+      linear-gradient(
+        180deg,
+        rgba(0, 0, 0, 0.05) 0%,
+        rgba(0, 0, 0, 0.25) 45%,
+        rgba(0, 0, 0, 0.55) 100%
+      ),
+      var(--detail-condition-image);
+    background-size: cover;
+    background-position: center;
+    background-attachment: local;
+  }
+}
+
+button {
+  font-family: inherit;
+}
